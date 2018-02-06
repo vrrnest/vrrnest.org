@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  icon = 'face';
+  title = 'VRR Nest Association';
+
+  constructor(private router: Router, private titleService: Title) {
+    router.events.subscribe(event => {
+      if(event instanceof NavigationEnd) {
+        let data = router.routerState.root.snapshot.firstChild.data;
+        this.title = data['title'];
+        this.icon = data['icon'];
+        titleService.setTitle(data['title']);
+      }
+    });
+  }
 }
