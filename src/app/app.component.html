@@ -4,8 +4,23 @@
 			<a mat-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="sidenav.close()">
 				<mat-icon>home</mat-icon> &nbsp; Home
 			</a>
-			<a mat-list-item routerLink="/dashboard" routerLinkActive="active" (click)="sidenav.close()">
-				<mat-icon>pie_chart</mat-icon> &nbsp; Dashboard
+			<a mat-list-item routerLink="/events" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>event</mat-icon> &nbsp; Events
+			</a>
+			<a mat-list-item routerLink="/facilities" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>pool</mat-icon> &nbsp; facilities
+			</a>
+			<a mat-list-item routerLink="/general-body-meeting" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>group</mat-icon> &nbsp; General Body Meeting
+			</a>
+			<a mat-list-item routerLink="/managing-committee" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>group_work</mat-icon> &nbsp; Managing Committee
+			</a>
+			<a mat-list-item routerLink="/rules-and-regulations" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>gavel</mat-icon> &nbsp; Rules and Regulations
+			</a>
+			<a mat-list-item routerLink="/stuffs" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>directions_walk</mat-icon> &nbsp; Stuffs
 			</a>
 		</mat-nav-list>
 	</mat-sidenav>

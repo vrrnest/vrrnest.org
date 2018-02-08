@@ -13,6 +13,12 @@ import { AppComponent } from './app.component';
 import { MatCommonModule } from '@angular/material/core/typings/common-behaviors/common-module';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ManagingCommitteeComponent } from './managing-committee/managing-committee.component';
+import { StuffsComponent } from './stuffs/stuffs.component';
+import { FacilitiesComponent } from './facilities/facilities.component';
+import { RulesAndRegulationsComponent } from './rules-and-regulations/rules-and-regulations.component';
+import { EventsComponent } from './events/events.component';
+import { GeneralBodyMeetingComponent } from './general-body-meeting/general-body-meeting.component';
 
 
 const appRoutes: Routes = [
@@ -23,8 +29,49 @@ const appRoutes: Routes = [
       title: 'VRR Nest',
       icon: 'home'
     }
-  },
-  {
+  }, {
+    path: 'events',
+    component: EventsComponent,
+    data: {
+      title: 'Events calendar',
+      icon: 'event'
+    }
+  }, {
+    path: 'facilities',
+    component: FacilitiesComponent,
+    data: {
+      title: 'Facilities in Nest',
+      icon: 'pool'
+    }
+  }, {
+    path: 'general-body-meeting',
+    component: GeneralBodyMeetingComponent,
+    data: {
+      title: 'General Body Meeting',
+      icon: 'group'
+    }
+  }, {
+    path: 'managing-committee',
+    component: ManagingCommitteeComponent,
+    data: {
+      title: 'Managing Committee',
+      icon: 'group_work'
+    }
+  }, {
+    path: 'rules-and-regulations',
+    component: RulesAndRegulationsComponent,
+    data: {
+      title: 'Rules and Regulations',
+      icon: 'gavel'
+    }
+  }, {
+    path: 'stuffs',
+    component: StuffsComponent,
+    data: {
+      title: 'Stuffs and Contractors',
+      icon: 'directions_walk'
+    }
+  }, {
     path: '**',
     component: NotFoundComponent,
     data: {
@@ -38,7 +85,13 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ManagingCommitteeComponent,
+    StuffsComponent,
+    FacilitiesComponent,
+    RulesAndRegulationsComponent,
+    EventsComponent,
+    GeneralBodyMeetingComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
