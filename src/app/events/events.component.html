@@ -1,1 +1,3 @@
-<iframe src="https://calendar.google.com/calendar/embed?src=gm6sldfvugsrg9haoqkm9oa7r8%40group.calendar.google.com&ctz=Asia%2FCalcutta" style="border: 0; top:0; left:0; right:0; bottom:0; width:100%; height:100%" scrolling="no"></iframe>
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<iframe (load)="loading=false" src="https://calendar.google.com/calendar/embed?src=gm6sldfvugsrg9haoqkm9oa7r8%40group.calendar.google.com&ctz=Asia%2FCalcutta" style="border: 0; top:0; left:0; right:0; bottom:0; width:100%; height:100%" scrolling="no"></iframe>
