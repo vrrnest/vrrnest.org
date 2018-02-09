@@ -14,21 +14,18 @@
     .grid {
         grid-template-columns: repeat(3, 1fr);
     }
-
 }
 
 @media (min-width: 992px) {
     .grid {
         grid-template-columns: repeat(4, 1fr);
     }
-
 }
 
 @media (min-width: 1200px) {
     .grid {
         grid-template-columns: repeat(5, 1fr);
     }
-
 }
 
 .mat-card-footer {
