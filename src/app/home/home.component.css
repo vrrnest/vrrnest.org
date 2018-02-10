@@ -1,11 +1,4 @@
-mat-spinner {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.map {
+.img {
     border: 0;
     top:0;
     left:0;
