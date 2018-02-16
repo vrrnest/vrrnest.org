@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeneralBodyMeetingComponent implements OnInit {
 
+  loading: boolean = true;
+
   constructor() { }
 
   ngOnInit() {
