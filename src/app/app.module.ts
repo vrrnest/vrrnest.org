@@ -7,8 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatProgressSpinnerModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
+import { AuthenticationService } from './authentication.service';
 import { AppComponent } from './app.component';
 import { MatCommonModule } from '@angular/material/core/typings/common-behaviors/common-module';
 import { HomeComponent } from './home/home.component';
@@ -19,6 +21,7 @@ import { FacilitiesComponent } from './facilities/facilities.component';
 import { RulesAndRegulationsComponent } from './rules-and-regulations/rules-and-regulations.component';
 import { EventsComponent } from './events/events.component';
 import { GeneralBodyMeetingComponent } from './general-body-meeting/general-body-meeting.component';
+import { LoginComponent } from './login/login.component';
 
 
 const appRoutes: Routes = [
@@ -49,6 +52,13 @@ const appRoutes: Routes = [
     data: {
       title: 'General Body Meeting',
       icon: 'group'
+    }
+  }, {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      title: 'Login',
+      icon: 'lock'
     }
   }, {
     path: 'managing-committee',
@@ -91,7 +101,8 @@ const appRoutes: Routes = [
     FacilitiesComponent,
     RulesAndRegulationsComponent,
     EventsComponent,
-    GeneralBodyMeetingComponent
+    GeneralBodyMeetingComponent,
+    LoginComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -100,6 +111,8 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
 
     BrowserAnimationsModule,
+    HttpClientModule,
+
     RouterModule.forRoot(appRoutes),
     MatButtonModule,
     MatCardModule,
@@ -109,7 +122,7 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatToolbarModule
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

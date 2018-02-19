@@ -1,0 +1,45 @@
+<mat-card *ngIf="authenticationService.user | async as user; else showLogin">
+  <mat-card-title-group>
+    <img mat-card-md-image [src]="user.photoURL" />
+    <mat-card-subtitle>Welcome</mat-card-subtitle>
+    <mat-card-title>{{ user.displayName }}</mat-card-title>
+  </mat-card-title-group>
+  <mat-card-actions>
+    <button mat-raised-button color="accent" (click)="authenticationService.logout()">
+      <mat-icon>power_settings_new</mat-icon>
+      <span>Logout</span>
+    </button>
+    <button mat-raised-button color="primary" (click)="authenticationService.continue()">
+      <mat-icon>navigate_next</mat-icon>
+      <span>Continue</span>
+    </button>
+  </mat-card-actions>
+</mat-card>
+
+<ng-template #showLogin>
+  <mat-card>
+    <mat-card-title>Login using</mat-card-title>
+    <mat-card-subtitle>{{authenticationService.message}}</mat-card-subtitle>
+    <mat-card-content *ngIf="authenticationService.progress">
+      <mat-spinner></mat-spinner>
+    </mat-card-content>
+    <mat-card-actions *ngIf="!authenticationService.progress">
+      <button mat-raised-button (click)="loginFacebook()">
+        <mat-icon svgIcon="company:facebook"></mat-icon>
+        <span>Facebook</span>
+      </button>
+      <button mat-raised-button (click)="loginGithub()">
+        <mat-icon svgIcon="company:github"></mat-icon>
+        <span>Github</span>
+      </button>
+      <button mat-raised-button (click)="loginGoogle()">
+        <mat-icon svgIcon="company:google"></mat-icon>
+        <span>Google</span>
+      </button>
+      <button mat-raised-button (click)="loginTwitter()">
+        <mat-icon svgIcon="company:twitter"></mat-icon>
+        <span>Twitter</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  </ng-template>
