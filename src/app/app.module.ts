@@ -8,20 +8,21 @@ import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatProgre
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatCommonModule } from '@angular/material/core/typings/common-behaviors/common-module';
 
 import { AuthenticationService } from './authentication.service';
+
+import { AdminComponent } from './admin/admin.component';
 import { AppComponent } from './app.component';
-import { MatCommonModule } from '@angular/material/core/typings/common-behaviors/common-module';
-import { HomeComponent } from './home/home.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { ManagingCommitteeComponent } from './managing-committee/managing-committee.component';
-import { StuffsComponent } from './stuffs/stuffs.component';
-import { FacilitiesComponent } from './facilities/facilities.component';
-import { RulesAndRegulationsComponent } from './rules-and-regulations/rules-and-regulations.component';
+import { ErrorComponent } from './error/error.component';
 import { EventsComponent } from './events/events.component';
+import { FacilitiesComponent } from './facilities/facilities.component';
 import { GeneralBodyMeetingComponent } from './general-body-meeting/general-body-meeting.component';
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ManagingCommitteeComponent } from './managing-committee/managing-committee.component';
+import { RulesAndRegulationsComponent } from './rules-and-regulations/rules-and-regulations.component';
+import { StuffsComponent } from './stuffs/stuffs.component';
 
 
 const appRoutes: Routes = [
@@ -31,6 +32,14 @@ const appRoutes: Routes = [
     data: {
       title: 'VRR Nest',
       icon: 'home'
+    }
+  }, {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthenticationService],
+    data: {
+      title: 'Administration',
+      icon: 'security'
     }
   }, {
     path: 'events',
@@ -82,27 +91,31 @@ const appRoutes: Routes = [
       icon: 'directions_walk'
     }
   }, {
-    path: '**',
-    component: NotFoundComponent,
+    path: 'error/:code',
+    component: ErrorComponent,
     data: {
-      title: 'HTTP 404: Not found',
+      title: 'ERROR',
       icon: 'warning'
     }
+  }, {
+    path: '**',
+    redirectTo: '/error/404'
  }
 ];
 
 @NgModule({
   declarations: [
+    AdminComponent,
     AppComponent,
-    HomeComponent,
-    NotFoundComponent,
-    ManagingCommitteeComponent,
-    StuffsComponent,
-    FacilitiesComponent,
-    RulesAndRegulationsComponent,
+    ErrorComponent,
     EventsComponent,
+    FacilitiesComponent,
     GeneralBodyMeetingComponent,
-    LoginComponent
+    HomeComponent,
+    LoginComponent,
+    ManagingCommitteeComponent,
+    RulesAndRegulationsComponent,
+    StuffsComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

@@ -8,7 +8,7 @@ import { User, auth } from 'firebase/app';
 export class AuthenticationService implements CanActivate {
 
   private redirectUrl: string = "/";
-  public user: Observable<User>;
+  public user: Observable<User> = Observable.of(null);
   public progress: boolean;
   public message: string;
 
@@ -16,13 +16,24 @@ export class AuthenticationService implements CanActivate {
     this.user = angularFireAuth.authState;
   }
 
-  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.user) {
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
+    return this.user.map(user => {
+      if (!user) {
+        this.redirectUrl = state.url;
+        this.router.navigate(['/login']);
+        return false;
+      }
+      if (route.url.toString() == "admin") {
+        if (user.email == "vrrnowa@gmail.com") {
+          return true;
+        } else {
+          this.redirectUrl = state.url;
+          this.router.navigate(['/error', '401']);
+          return false;
+        }
+      }
       return true;
-    }
-    this.redirectUrl = state.url;
-    this.router.navigateByUrl('/login');
-    return false;
+    });
   }
 
   public login(authProvider: auth.AuthProvider) {
