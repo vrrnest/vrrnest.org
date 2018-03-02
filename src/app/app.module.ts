@@ -17,11 +17,12 @@ import { AppComponent } from './app.component';
 import { ErrorComponent } from './error/error.component';
 import { EventsComponent } from './events/events.component';
 import { FacilitiesComponent } from './facilities/facilities.component';
-import { GeneralBodyMeetingComponent } from './general-body-meeting/general-body-meeting.component';
+import { FireProtectionSystemComponent } from './documents/fire-protection-system/fire-protection-system.component';
+import { GeneralBodyMeetingComponent } from './documents/general-body-meeting/general-body-meeting.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ManagingCommitteeComponent } from './managing-committee/managing-committee.component';
-import { RulesAndRegulationsComponent } from './rules-and-regulations/rules-and-regulations.component';
+import { RulesAndRegulationsComponent } from './documents/rules-and-regulations/rules-and-regulations.component';
 import { StuffsComponent } from './stuffs/stuffs.component';
 
 
@@ -42,6 +43,30 @@ const appRoutes: Routes = [
       icon: 'security'
     }
   }, {
+    path: 'documents/general-body-meeting',
+    component: GeneralBodyMeetingComponent,
+    canActivate: [AuthenticationService],
+    data: {
+      title: 'General Body Meeting',
+      icon: 'group'
+    }
+  }, {
+    path: 'documents/fire-protection-system',
+    component: FireProtectionSystemComponent,
+    canActivate: [AuthenticationService],
+    data: {
+      title: 'Fire Protection System',
+      icon: 'whatshot'
+    }
+  }, {
+    path: 'documents/rules-and-regulations',
+    component: RulesAndRegulationsComponent,
+    canActivate: [AuthenticationService],
+    data: {
+      title: 'Rules and Regulations',
+      icon: 'gavel'
+    }
+  }, {
     path: 'events',
     component: EventsComponent,
     data: {
@@ -56,13 +81,6 @@ const appRoutes: Routes = [
       icon: 'pool'
     }
   }, {
-    path: 'general-body-meeting',
-    component: GeneralBodyMeetingComponent,
-    data: {
-      title: 'General Body Meeting',
-      icon: 'group'
-    }
-  }, {
     path: 'login',
     component: LoginComponent,
     data: {
@@ -75,13 +93,6 @@ const appRoutes: Routes = [
     data: {
       title: 'Managing Committee',
       icon: 'group_work'
-    }
-  }, {
-    path: 'rules-and-regulations',
-    component: RulesAndRegulationsComponent,
-    data: {
-      title: 'Rules and Regulations',
-      icon: 'gavel'
     }
   }, {
     path: 'stuffs',
@@ -107,6 +118,7 @@ const appRoutes: Routes = [
   declarations: [
     AdminComponent,
     AppComponent,
+    FireProtectionSystemComponent,
     ErrorComponent,
     EventsComponent,
     FacilitiesComponent,

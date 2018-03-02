@@ -1,6 +1,7 @@
 <mat-sidenav-container fullscreen>
 	<mat-sidenav #sidenav align="end">
 		<mat-nav-list>
+			<h3 mat-subheader>General</h3>
 			<a mat-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="sidenav.close()">
 				<mat-icon>home</mat-icon> &nbsp; Home
 			</a>
@@ -13,17 +14,21 @@
 			<a mat-list-item routerLink="/facilities" routerLinkActive="active" (click)="sidenav.close()">
 				<mat-icon>pool</mat-icon> &nbsp; facilities
 			</a>
-			<a mat-list-item routerLink="/general-body-meeting" routerLinkActive="active" (click)="sidenav.close()">
-				<mat-icon>group</mat-icon> &nbsp; General Body Meeting
-			</a>
 			<a mat-list-item routerLink="/managing-committee" routerLinkActive="active" (click)="sidenav.close()">
 				<mat-icon>group_work</mat-icon> &nbsp; Managing Committee
 			</a>
-			<a mat-list-item routerLink="/rules-and-regulations" routerLinkActive="active" (click)="sidenav.close()">
-				<mat-icon>gavel</mat-icon> &nbsp; Rules and Regulations
-			</a>
 			<a mat-list-item routerLink="/stuffs" routerLinkActive="active" (click)="sidenav.close()">
 				<mat-icon>directions_walk</mat-icon> &nbsp; Stuffs
+			</a>
+			<h3 mat-subheader>Documents</h3>
+			<a mat-list-item routerLink="/documents/fire-protection-system" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>whatshot</mat-icon> &nbsp; Fire Protection System
+			</a>
+			<a mat-list-item routerLink="/documents/general-body-meeting" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>group</mat-icon> &nbsp; General Body Meeting
+			</a>
+			<a mat-list-item routerLink="/documents/rules-and-regulations" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>gavel</mat-icon> &nbsp; Rules and Regulations
 			</a>
 		</mat-nav-list>
 	</mat-sidenav>
