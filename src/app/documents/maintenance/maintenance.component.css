@@ -16,7 +16,7 @@ mat-spinner {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.iframe {
+iframe {
     border: 0;
     top:0;
     left:0;
