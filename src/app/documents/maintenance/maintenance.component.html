@@ -1,0 +1,31 @@
+<br />
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div class="grid">
+    <mat-card>
+        <mat-card-title>Payment Methods</mat-card-title>
+        <mat-card-content>
+            <iframe class="iframe" (load)="loading=false" src="https://drive.google.com/file/d/1PuBrENvrENLEsrM-NUUGIYbma7DvSUlb/preview"></iframe>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-raised-button color="primary" href="https://drive.google.com/file/d/1PuBrENvrENLEsrM-NUUGIYbma7DvSUlb/view" target="_blank"><mat-icon>launch</mat-icon></a>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card>
+        <mat-card-title>Payment Amount</mat-card-title>
+        <mat-card-content>
+            <iframe class="iframe" (load)="loading=false" src="https://docs.google.com/spreadsheets/d/1nuvmHr_R1axyqiYg2W9WUq2NpUKbg893lxkCAY57Leo/preview#gid=1060444725"></iframe>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-raised-button color="primary" href="https://docs.google.com/spreadsheets/d/1nuvmHr_R1axyqiYg2W9WUq2NpUKbg893lxkCAY57Leo/view#gid=1060444725" target="_blank"><mat-icon>launch</mat-icon></a>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card>
+        <mat-card-title>Update Form</mat-card-title>
+        <mat-card-content>
+            <iframe class="iframe" (load)="loading=false" src="https://docs.google.com/forms/d/e/1FAIpQLSdWvVxDCHE7bpuj0qSpcphw2DE1ScsxrnZ6obOLuxbP_YhuoQ/viewform"></iframe>
+        </mat-card-content>
+        <mat-card-actions>
+            <a mat-raised-button color="primary" href="https://docs.google.com/forms/d/e/1FAIpQLSdWvVxDCHE7bpuj0qSpcphw2DE1ScsxrnZ6obOLuxbP_YhuoQ/viewform" target="_blank"><mat-icon>launch</mat-icon></a>
+        </mat-card-actions>
+    </mat-card>
+  </div>

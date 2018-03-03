@@ -24,6 +24,7 @@ import { LoginComponent } from './login/login.component';
 import { ManagingCommitteeComponent } from './managing-committee/managing-committee.component';
 import { RulesAndRegulationsComponent } from './documents/rules-and-regulations/rules-and-regulations.component';
 import { StuffsComponent } from './stuffs/stuffs.component';
+import { MaintenanceComponent } from './documents/maintenance/maintenance.component';
 
 
 const appRoutes: Routes = [
@@ -57,6 +58,14 @@ const appRoutes: Routes = [
     data: {
       title: 'Fire Protection System',
       icon: 'whatshot'
+    }
+  }, {
+    path: 'documents/maintenance',
+    component: MaintenanceComponent,
+    canActivate: [AuthenticationService],
+    data: {
+      title: 'Maintenance',
+      icon: 'monetization_on'
     }
   }, {
     path: 'documents/rules-and-regulations',
@@ -125,6 +134,7 @@ const appRoutes: Routes = [
     GeneralBodyMeetingComponent,
     HomeComponent,
     LoginComponent,
+    MaintenanceComponent,
     ManagingCommitteeComponent,
     RulesAndRegulationsComponent,
     StuffsComponent
