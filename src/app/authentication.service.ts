@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User, auth } from 'firebase/app';
+import { FirebaseAuth } from '@firebase/auth-types';
 
 @Injectable()
 export class AuthenticationService implements CanActivate {
@@ -11,6 +12,7 @@ export class AuthenticationService implements CanActivate {
   public user: Observable<User> = Observable.of(null);
   public progress: boolean;
   public message: string;
+  public accessToken: string;
 
   constructor(private router: Router, private angularFireAuth: AngularFireAuth) {
     this.user = angularFireAuth.authState;
@@ -18,6 +20,7 @@ export class AuthenticationService implements CanActivate {
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
     return this.user.map(user => {
+      console.log(user);
       if (!user) {
         this.redirectUrl = state.url;
         this.router.navigate(['/login']);
@@ -41,6 +44,8 @@ export class AuthenticationService implements CanActivate {
     this.message = null;
     this.angularFireAuth.auth.signInWithPopup(authProvider)
     .then(response => {
+      this.accessToken=response.credential.accessToken;
+      console.log(response);
       this.progress = false;
       this.message = "login successful";
     }, reject => {

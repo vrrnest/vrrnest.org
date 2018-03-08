@@ -12,20 +12,10 @@ export class LoginComponent {
   constructor(public authenticationService: AuthenticationService) {
   }
 
-  loginFacebook() {
-    this.authenticationService.login(new auth.FacebookAuthProvider);
-  }
-
-  loginGithub() {
-    this.authenticationService.login(new auth.GithubAuthProvider);
-  }
-
   loginGoogle() {
-    this.authenticationService.login(new auth.GoogleAuthProvider);
-  }
-
-  loginTwitter() {
-    this.authenticationService.login(new auth.TwitterAuthProvider);
+    let authProvider = new auth.GoogleAuthProvider();
+    authProvider.addScope("https://www.googleapis.com/auth/spreadsheets.readonly");
+    this.authenticationService.login(authProvider);
   }
 
 }
