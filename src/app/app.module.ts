@@ -1,8 +1,3 @@
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireStorageModule } from 'angularfire2/storage';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCardModule, MatIconModule, MatListModule, MatProgressSpinnerModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
 import { NgModule } from '@angular/core';
@@ -12,7 +7,6 @@ import { MatCommonModule } from '@angular/material/core/typings/common-behaviors
 
 import { AuthenticationService } from './authentication.service';
 
-import { AdminComponent } from './admin/admin.component';
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './error/error.component';
 import { EventsComponent } from './events/events.component';
@@ -32,24 +26,8 @@ const appRoutes: Routes = [
     path: '',
     component: HomeComponent,
     data: {
-      title: 'VRR Nest',
+      title: 'VRR Nest Association',
       icon: 'home'
-    }
-  }, {
-    path: 'admin',
-    component: AdminComponent,
-    canActivate: [AuthenticationService],
-    data: {
-      title: 'Administration',
-      icon: 'security'
-    }
-  }, {
-    path: 'documents/general-body-meeting',
-    component: GeneralBodyMeetingComponent,
-    canActivate: [AuthenticationService],
-    data: {
-      title: 'General Body Meeting',
-      icon: 'group'
     }
   }, {
     path: 'documents/fire-protection-system',
@@ -58,6 +36,14 @@ const appRoutes: Routes = [
     data: {
       title: 'Fire Protection System',
       icon: 'whatshot'
+    }
+  }, {
+    path: 'documents/general-body-meeting',
+    component: GeneralBodyMeetingComponent,
+    canActivate: [AuthenticationService],
+    data: {
+      title: 'General Body Meeting',
+      icon: 'group'
     }
   }, {
     path: 'documents/maintenance',
@@ -78,6 +64,7 @@ const appRoutes: Routes = [
   }, {
     path: 'events',
     component: EventsComponent,
+    canActivate: [AuthenticationService],
     data: {
       title: 'Events calendar',
       icon: 'event'
@@ -106,6 +93,7 @@ const appRoutes: Routes = [
   }, {
     path: 'stuffs',
     component: StuffsComponent,
+    canActivate: [AuthenticationService],
     data: {
       title: 'Stuffs and Contractors',
       icon: 'directions_walk'
@@ -125,7 +113,6 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AdminComponent,
     AppComponent,
     FireProtectionSystemComponent,
     ErrorComponent,
@@ -140,11 +127,6 @@ const appRoutes: Routes = [
     StuffsComponent
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireStorageModule,
-    AngularFireAuthModule,
-
     BrowserAnimationsModule,
     HttpClientModule,
 

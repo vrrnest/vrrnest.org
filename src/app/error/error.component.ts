@@ -19,6 +19,11 @@ export class ErrorComponent implements OnInit {
       switch(params['code']) {
         case "401":
           this.code = "HTTP 401: Unauthorized";
+          this.message = "Please login";
+          this.details = "You are not logged in with correct credentials.";
+          break;
+        case "403":
+          this.code = "HTTP 403: Forbidden";
           this.message = "Sorry, permission denied";
           this.details = "You are not authorized to access the page.";
           break;

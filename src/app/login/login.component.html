@@ -1,17 +1,13 @@
 <mat-card *ngIf="authenticationService.user | async as user; else showLogin">
   <mat-card-title-group>
-    <img mat-card-md-image [src]="user.photoURL" />
-    <mat-card-subtitle>Welcome</mat-card-subtitle>
-    <mat-card-title>{{ user.displayName }}</mat-card-title>
+    <img mat-card-md-image [src]="user.picture" />
+    <mat-card-title>{{ user.name }}</mat-card-title>
+    <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
   </mat-card-title-group>
   <mat-card-actions>
-    <button mat-raised-button color="accent" (click)="authenticationService.logout()">
+    <button mat-raised-button color="accent" (click)="logout()">
       <mat-icon>power_settings_new</mat-icon>
       <span>Logout</span>
-    </button>
-    <button mat-raised-button color="primary" (click)="authenticationService.continue()">
-      <mat-icon>navigate_next</mat-icon>
-      <span>Continue</span>
     </button>
   </mat-card-actions>
 </mat-card>
@@ -27,7 +23,7 @@
       </ng-template>
     </mat-card-content>
     <mat-card-actions *ngIf="!authenticationService.progress">
-      <button mat-raised-button (click)="loginGoogle()">
+      <button mat-raised-button (click)="login()">
         <mat-icon svgIcon="company:google"></mat-icon>
         <span>Google</span>
       </button>

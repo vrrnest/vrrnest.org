@@ -1,81 +1,56 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { User, auth } from 'firebase/app';
-import { FirebaseAuth } from '@firebase/auth-types';
 
 @Injectable()
 export class AuthenticationService implements CanActivate {
 
-  private redirectUrl: string = "/";
-  public user: Observable<User> = Observable.of(null);
-  public progress: boolean;
-  public message: string;
-  public accessToken: string;
+  private redirectUrl: string = undefined;
+  private token: string;
+  public progress: boolean = false;
+  public user: Observable<Object>;
 
-  constructor(private router: Router, private angularFireAuth: AngularFireAuth) {
-    this.user = angularFireAuth.authState;
+  constructor(private router: Router, private http: HttpClient) {
+    this.token = window.sessionStorage.getItem("token");
+    if (this.token) {
+      this.setToken(this.token);
+    }
   }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
-    return this.user.map(user => {
-      console.log(user);
-      if (!user) {
-        this.redirectUrl = state.url;
+    return !!this.token;
+  }
+
+  public setToken(token: string): void {
+    this.progress = true;
+    this.http.get("https://sheets.googleapis.com/v4/spreadsheets/1nuvmHr_R1axyqiYg2W9WUq2NpUKbg893lxkCAY57Leo?access_token=" + token).subscribe(data => {
+      window.sessionStorage.setItem("token", token);
+      this.token = token;
+      this.user = this.http.get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token);
+      if (this.redirectUrl) {
+        this.router.navigateByUrl(this.redirectUrl);
+      } else {
         this.router.navigate(['/login']);
-        return false;
       }
-      if (route.url.toString() == "admin") {
-        if (user.email == "vrrnowa@gmail.com") {
-          return true;
-        } else {
-          this.redirectUrl = state.url;
-          this.router.navigate(['/error', '401']);
-          return false;
-        }
-      }
-      return true;
-    });
+  }, error => {
+      // User is authenticated, but does not belong to vrrnest group.
+      console.log(error);
+      this.removeToken();
+      this.router.navigate(['/error', error['status']]);
+    }, () => this.progress = false);
   }
 
-  public login(authProvider: auth.AuthProvider) {
-    this.progress = true;
-    this.message = null;
-    this.angularFireAuth.auth.signInWithPopup(authProvider)
-    .then(response => {
-      this.accessToken=response.credential.accessToken;
-      console.log(response);
-      this.progress = false;
-      this.message = "login successful";
-    }, reject => {
-      this.progress = false;
-      try {
-        this.message  = JSON.parse(reject.message)["error"]["message"];
-      } catch (e) {
-        this.message = reject.message;
-      }
-      console.log(reject);
+  public removeToken(): void {
+    let iframe = document.createElement('iframe');
+    iframe.setAttribute('name', 'hiddenIframe');
+    iframe.setAttribute('src', 'https://accounts.google.com/o/oauth2/revoke?token=' + this.token);
+    document.body.appendChild(iframe);
+    window.sessionStorage.removeItem("token");
+    this.token = undefined;
+    this.user = Observable.create(function(observer) {
+      observer.next(null);
     });
-  }
-
-  public logout() {
-    this.progress = true;
-    this.angularFireAuth.auth.signOut().then(response => {
-      this.progress = false;
-      this.message = null;
-    }, reject => {
-      this.progress = false;
-      try {
-        this.message  = JSON.parse(reject.message)["error"]["message"];
-      } catch (e) {
-        this.message = reject.message;
-      }
-      console.log(reject);
-    });
-  }
-
-  public continue() {
-    this.router.navigateByUrl(this.redirectUrl);
   }
 }
