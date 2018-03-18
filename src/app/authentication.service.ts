@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { User, auth } from 'firebase/app';
 
 @Injectable()
 export class AuthenticationService implements CanActivate {
@@ -20,12 +19,17 @@ export class AuthenticationService implements CanActivate {
   }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
-    return !!this.token;
+    if (this.token) {
+      return true;
+    }
+    this.router.navigate(['/login']);
+    return false;
   }
 
   public setToken(token: string): void {
     this.progress = true;
     this.http.get("https://sheets.googleapis.com/v4/spreadsheets/1nuvmHr_R1axyqiYg2W9WUq2NpUKbg893lxkCAY57Leo?access_token=" + token).subscribe(data => {
+      this.progress = false;
       window.sessionStorage.setItem("token", token);
       this.token = token;
       this.user = this.http.get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token);
@@ -36,10 +40,11 @@ export class AuthenticationService implements CanActivate {
       }
   }, error => {
       // User is authenticated, but does not belong to vrrnest group.
+      this.progress = false;
       console.log(error);
       this.removeToken();
       this.router.navigate(['/error', error['status']]);
-    }, () => this.progress = false);
+    });
   }
 
   public removeToken(): void {
