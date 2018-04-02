@@ -6,7 +6,6 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 @Injectable()
 export class AuthenticationService implements CanActivate {
 
-  private redirectUrl: string = undefined;
   private token: string;
   public progress: boolean = false;
   public user: Observable<Object>;
@@ -20,8 +19,10 @@ export class AuthenticationService implements CanActivate {
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|Promise<boolean>|boolean {
     if (this.token) {
+      window.sessionStorage.removeItem("redirectUrl");
       return true;
     }
+    window.sessionStorage.setItem("redirectUrl", state.url);
     this.router.navigate(['/login']);
     return false;
   }
@@ -29,12 +30,14 @@ export class AuthenticationService implements CanActivate {
   public setToken(token: string): void {
     this.progress = true;
     this.http.get("https://sheets.googleapis.com/v4/spreadsheets/1nuvmHr_R1axyqiYg2W9WUq2NpUKbg893lxkCAY57Leo?access_token=" + token).subscribe(data => {
+      console.log(data);
       this.progress = false;
       window.sessionStorage.setItem("token", token);
       this.token = token;
       this.user = this.http.get("https://www.googleapis.com/oauth2/v2/userinfo?access_token=" + token);
-      if (this.redirectUrl) {
-        this.router.navigateByUrl(this.redirectUrl);
+      let redirectUrl: string = window.sessionStorage.getItem("redirectUrl");
+      if (redirectUrl) {
+        this.router.navigateByUrl(redirectUrl);
       } else {
         this.router.navigate(['/login']);
       }
