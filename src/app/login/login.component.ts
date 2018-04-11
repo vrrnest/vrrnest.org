@@ -19,14 +19,18 @@ export class LoginComponent implements OnInit {
         return;
       }
       let token: string = undefined;
+      let redirectUrl: string = undefined;
       fragment.split("&").forEach(s => {
         let kv: string[] = s.split("=");
         if (kv.length == 2 && kv[0] == "access_token") {
           token = kv[1];
         }
+        if (kv.length == 2 && kv[0] == "state") {
+          redirectUrl = kv[1];
+        }
       });
       if (token) {
-        this.authenticationService.setToken(token);
+        this.authenticationService.setToken(token, redirectUrl);
       }
     });
   }
@@ -39,7 +43,13 @@ export class LoginComponent implements OnInit {
       let input = document.createElement("input");
       input.setAttribute("type", "hidden");
       input.setAttribute("name", p);
-      input.setAttribute("value", environment.oAuth2[p]);
+      if (p == "state") {
+        if (this.authenticationService.redirectUrl) {
+          input.setAttribute("value", this.authenticationService.redirectUrl);
+        } else {
+          input.setAttribute("value", environment.oAuth2[p]);
+        }
+      }
       form.appendChild(input);
     }
     document.body.appendChild(form);
