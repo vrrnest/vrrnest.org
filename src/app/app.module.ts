@@ -19,6 +19,7 @@ import { ManagingCommitteeComponent } from './managing-committee/managing-commit
 import { RulesAndRegulationsComponent } from './documents/rules-and-regulations/rules-and-regulations.component';
 import { StuffsComponent } from './stuffs/stuffs.component';
 import { MaintenanceComponent } from './documents/maintenance/maintenance.component';
+import { ComplaintsComponent } from './complaints/complaints.component';
 
 
 const appRoutes: Routes = [
@@ -60,6 +61,13 @@ const appRoutes: Routes = [
     data: {
       title: 'Rules and Regulations',
       icon: 'gavel'
+    }
+  }, {
+    path: 'complaints',
+    component: ComplaintsComponent,
+    data: {
+      title: 'Complaints',
+      icon: 'report'
     }
   }, {
     path: 'events',
@@ -114,6 +122,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    ComplaintsComponent,
     FireProtectionSystemComponent,
     ErrorComponent,
     EventsComponent,

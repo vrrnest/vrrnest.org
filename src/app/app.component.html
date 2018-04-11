@@ -5,6 +5,9 @@
 			<a mat-list-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="sidenav.close()">
 				<mat-icon>home</mat-icon> &nbsp; Home
 			</a>
+			<a mat-list-item routerLink="/complaints" routerLinkActive="active" (click)="sidenav.close()">
+				<mat-icon>report</mat-icon> &nbsp; Complaints
+			</a>
 			<a mat-list-item routerLink="/events" routerLinkActive="active" (click)="sidenav.close()">
 				<mat-icon>event</mat-icon> &nbsp; Events
 			</a>
