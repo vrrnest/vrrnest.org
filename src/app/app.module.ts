@@ -17,7 +17,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ManagingCommitteeComponent } from './managing-committee/managing-committee.component';
 import { RulesAndRegulationsComponent } from './documents/rules-and-regulations/rules-and-regulations.component';
-import { StaffsComponent } from './staffs/staffs.component';
 import { MaintenanceComponent } from './documents/maintenance/maintenance.component';
 import { ComplaintsComponent } from './complaints/complaints.component';
 
@@ -96,14 +95,6 @@ const appRoutes: Routes = [
       icon: 'group_work'
     }
   }, {
-    path: 'staffs',
-    component: StaffsComponent,
-    canActivate: [AuthenticationService],
-    data: {
-      title: 'Staffs and Contractors',
-      icon: 'directions_walk'
-    }
-  }, {
     path: 'error/:code',
     component: ErrorComponent,
     data: {
@@ -129,8 +120,7 @@ const appRoutes: Routes = [
     LoginComponent,
     MaintenanceComponent,
     ManagingCommitteeComponent,
-    RulesAndRegulationsComponent,
-    StaffsComponent
+    RulesAndRegulationsComponent
   ],
   imports: [
     BrowserAnimationsModule,
