@@ -49,7 +49,6 @@ const appRoutes: Routes = [
   }, {
     path: 'documents/maintenance',
     component: MaintenanceComponent,
-    canActivate: [AuthenticationService],
     data: {
       title: 'Maintenance',
       icon: 'monetization_on'
@@ -57,7 +56,6 @@ const appRoutes: Routes = [
   }, {
     path: 'documents/rules-and-regulations',
     component: RulesAndRegulationsComponent,
-    canActivate: [AuthenticationService],
     data: {
       title: 'Rules and Regulations',
       icon: 'gavel'
@@ -72,7 +70,6 @@ const appRoutes: Routes = [
   }, {
     path: 'events',
     component: EventsComponent,
-    canActivate: [AuthenticationService],
     data: {
       title: 'Events calendar',
       icon: 'event'
